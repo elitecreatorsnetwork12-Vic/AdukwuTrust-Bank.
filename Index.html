@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AdukwuTrust Bank — Your Future, Our Focus</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase (compat libs for simpler code) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <img src="Logo.jpeg" alt="AdukwuTrust logo" class="brand-logo"/>
+      <div class="brand-title">AdukwuTrust <span>Bank</span></div>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><button id="openAuth" class="btn btn-outline">Account</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <img src="images/placeholder-hero.jpg" alt="Hope image" class="hero-bg">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+      <h1>Your Future, <span>Our Focus</span></h1>
+      <p>Building trust, empowering growth, and redefining financial excellence.</p>
+      <div class="ctas">
+        <a href="#services" class="btn btn-primary">Explore Services</a>
+        <button id="openAuthHero" class="btn btn-ghost">Create Account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About AdukwuTrust Bank</h2>
+      <p><strong>AdukwuTrust Bank</strong> combines secure digital infrastructure with a human-first approach, offering tailored financial solutions for individuals, students, creators and entrepreneurs.</p>
+      <p>We emphasize transparency, discipline, and measurable growth — connecting members with the tools and community to thrive.</p>
+      <p>For this demo portfolio we provide a realistic UX: email verification, login, and a fully functional dashboard powered by Firebase Realtime Database.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section alt">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <article class="svc-card">
+          <img src="code6.jpg" alt="">
+          <h3>Savings & Checking</h3>
+          <p>Flexible accounts with competitive rates and fast online access.</p>
+        </article>
+        <article class="svc-card">
+          <img src="code5.jpg" alt="">
+          <h3>Digital Banking</h3>
+          <p>Secure mobile & web banking with instant notifications.</p>
+        </article>
+        <article class="svc-card">
+          <img src="card1.jpg" alt="">
+          <h3>Loans & Investments</h3>
+          <p>Tailored lending and investment options with transparent terms.</p>
+        </article>
+        <article class="svc-card">
+          <img src="card2.jpg" alt="">
+          <h3>Business Banking</h3>
+          <p>Solutions for vendors and entrepreneurs — payments, payroll and growth tools.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container contact-grid">
+      <div class="contact-left">
+        <h2>Contact Us</h2>
+        <p>We’re here to help — reach our support team anytime.</p>
+        <p><strong>Phone:</strong> <a href="tel:+2348001234567">+234 800 123 4567</a></p>
+        <p><strong>Email:</strong> <a href="mailto:support@adukwutrustbank.com">support@adukwutrustbank.com</a></p>
+        <p><strong>Address:</strong> 24 Unity Avenue, Lagos, Nigeria</p>
+      </div>
+
+      <div class="contact-right">
+        <form id="contactForm">
+          <label><input id="c_name" placeholder="Full name" required></label>
+          <label><input id="c_email" type="email" placeholder="Email" required></label>
+          <label><input id="c_subject" placeholder="Subject" required></label>
+          <label><textarea id="c_message" placeholder="Message (max 500 words)" rows="5" required></textarea></label>
+          <div class="form-row">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="reset" class="btn btn-ghost">Reset</button>
+          </div>
+          <div id="contactStatus" class="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="small img">
+      <div class="footer-left">
+        <img src="Logo.jpeg" class="brand-logo" alt="small">
+        <small>© 2025 AdukwuTrust Bank — Your Future, Our Focus.</small>
+      </div>
+      <div class="footer-right">
+        <small>Follow us on social media</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTH MODAL (single modal with tabs) -->
+  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel">
+      <button id="closeModal" class="modal-close">✕</button>
+      <div class="auth-tabs">
+        <button id="tabLogin" class="tab active">Login</button>
+        <button id="tabRegister" class="tab">Create Account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginTab" class="tab-panel">
+        <form id="loginForm">
+          <label>Email<input id="l_email" type="email" required /></label>
+          <label>Password<input id="l_password" type="password" required /></label>
+          <label class="inline"><input id="rememberMe" type="checkbox"> Remember me</label>
+          <div class="form-row">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" id="forgotBtn" class="btn btn-ghost">Forgot?</button>
+          </div>
+        </form>
+
+        <div class="divider"><span>OR</span></div>
+        <div class="social-login">
+          <button id="googleSignIn" class="btn btn-google">Sign in with Google</button>
+        </div>
+
+        <p class="switch">Don't have an account? <button id="toRegister" class="link-btn">Create one</button></p>
+        <div id="loginStatus" class="status" aria-live="polite"></div>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerTab" class="tab-panel hidden">
+        <form id="registerForm">
+          <label>Full name<input id="r_name" required /></label>
+          <label>Email<input id="r_email" type="email" required /></label>
+          <label>Password<input id="r_password" type="password" minlength="6" required /></label>
+          <label>Confirm Password<input id="r_password2" type="password" minlength="6" required /></label>
+          <div class="form-row">
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button type="button" id="toLogin" class="btn btn-ghost">Back to Login</button>
+          </div>
+        </form>
+        <div id="registerStatus" class="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- small preloader for redirect -->
+  <div id="preloader" class="preloader hidden">
+    <div class="loader">Loading your account…</div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — AdukwuTrust Bank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <header class="dash-header">
+    <div class="dash-left">
+      <img src="images/logo.png" alt="logo" style="height:44px">
+    </div>
+    <div class="dash-right">
+      <button id="notifBtn" class="icon">🔔</button>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main container">
+    <section class="dash-top">
+      <div class="profile-left">
+        <button id="editProfileBtn" class="icon profile-btn"><img src="images/profile-placeholder.png" alt="profile" /></button>
+        <div>
+          <small>Welcome back</small>
+          <h2 id="dashName">Hello, User</h2>
+        </div>
+      </div>
+      <div class="profile-right">
+        <div class="balance-card">
+          <img src="images/dashboard-banner.jpg" alt="" class="balance-banner" />
+          <div class="balance-overlay">
+            <small>Total Account Balance</small>
+            <h1 id="dashBalance">₦ 0.00</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="addAccountBtn" class="fab">＋</button>
+      <div class="actions-row">
+        <button id="sendMoneyBtn" class="action-btn">Send Money</button>
+        <button id="txBtn" class="action-btn">Transactions</button>
+        <button id="payBtn" class="action-btn">Pay Bills</button>
+        <button id="loanBtn" class="action-btn">Quick Loan</button>
+        <button id="enairaBtn" class="action-btn">eNaira</button>
+      </div>
+    </section>
+
+    <section id="panels" class="panels">
+      <div id="panelSend" class="panel hidden">
+        <h3>Send Money</h3>
+        <form id="sendForm">
+          <label>Recipient Email<input id="t_email" type="email" required /></label>
+          <label>Amount<input id="t_amount" type="number" min="1" required /></label>
+          <label>Note<input id="t_note" /></label>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+        <div id="sendStatus" class="status"></div>
+      </div>
+
+      <div id="panelTx" class="panel hidden">
+        <h3>Transactions</h3>
+        <ul id="txList" class="tx-list"></ul>
+      </div>
+
+      <div id="panelLoan" class="panel hidden">
+        <h3>Quick Loan</h3>
+        <p>Request small loans if eligible.</p>
+        <button id="requestLoan" class="btn btn-primary">Request Loan</button>
+        <div id="loanStatus" class="status"></div>
+      </div>
+
+      <div id="panelMore" class="panel hidden">
+        <h3>More Services</h3>
+        <ul>
+          <li><button id="contactService" class="btn btn-ghost">Contact Customer Service</button></li>
+          <li><button id="blockCard" class="btn btn-ghost">Block ATM Card</button></li>
+          <li><button id="orderCard" class="btn btn-ghost">Order ATM Card</button></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:20px;background:#f6f8fb;margin-top:40px;">
+    <small>© 2025 AdukwuTrust Bank</small>
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
